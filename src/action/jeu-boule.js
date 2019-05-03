@@ -1,6 +1,8 @@
 (function(){
     
-      (function initialiser(){
+    var vuePartie;
+    
+    (function initialiser(){
 
         multiNode = new MultiNode();
         multiNode.confirmerConnexion = confirmerConnexion;
@@ -9,7 +11,8 @@
         multiNode.recevoirVariable = recevoirVariable;
         multiNode.connecter();
 
-
+        vuePartie = VUE.partie;
+          
         document.addEventListener("DOMContentLoaded", preparerJeu);
 
     })();
@@ -36,6 +39,11 @@
     function preparerJeu(evenement)
     {
         console.log("jeu-boule --> preparerJeu");
+        
+        vuePartie.afficher(900, 700);
+        //var arrierePlan = new ArrierePlan();
     }
+    
+    
     
 })();
