@@ -30,7 +30,7 @@ VUE.partie = (function(){
 
     }
 
-    module.afficher = function(nouvelleLargeur, nouvelleHauteur){
+    module.afficher = function(nouvelleLargeur, nouvelleHauteur,agirSurClic){
 
         body.innerHTML = pagePartieContenu;
 
@@ -46,6 +46,8 @@ VUE.partie = (function(){
 
         joueurBoulle1 = new JoueurBoulle(canevas);
         joueurBoulle1.afficher("red",largeur/4, hauteur/2);
+
+        canevas.on('click', agirSurClic);
 
 
 
