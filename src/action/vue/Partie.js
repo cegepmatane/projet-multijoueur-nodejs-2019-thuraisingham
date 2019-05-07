@@ -12,7 +12,9 @@ VUE.partie = (function(){
     var hauteur;
 
     var arrierePlan;
-    
+
+    var joueurBoulle1;
+
 
 
     (function initialiser(){
@@ -38,9 +40,13 @@ VUE.partie = (function(){
         canevas = SVG('canevas').size(largeur, hauteur);
         canevas.viewbox(0, 0, largeur, hauteur);
 
-        
+
         arrierePlan = new ArrierePlan(canevas);
         arrierePlan.afficher();
+
+        joueurBoulle1 = new JoueurBoulle(canevas);
+        joueurBoulle1.afficher("red",largeur/4, hauteur/2);
+
 
 
     }
