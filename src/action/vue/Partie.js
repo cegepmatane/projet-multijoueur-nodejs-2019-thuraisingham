@@ -52,6 +52,31 @@ VUE.partie = (function(){
 
 
     }
+    module.getJoueurBoullePosition = function(numeroJoueur){
+      switch (numeroJoueur) {
+        case 1:
+          return joueurBoulle1.getPosition();
+          break;
+      }
+      return null;
+    }
+
+    module.setJoueurBoullePosition = function(numeroJoueur,x,y){
+      switch (numeroJoueur) {
+        case 1:
+          joueurBoulle1.setPosition(x,y);
+          break;
+      }
+    }
+
+    module.deplacerJoueurBoulle = function(numeroJoueur,deplacementX, deplacementY)
+    {
+      switch (numeroJoueur) {
+        case 1:
+          joueurBoulle1.deplacer(deplacementX, deplacementY);
+          break;
+      }
+    }
 
     return module;
 
