@@ -15,6 +15,7 @@ VUE.partie = (function(){
 
     var joueurBoulle1;
 
+    var groupeBouffeBoulle;
 
 
     (function initialiser(){
@@ -28,9 +29,10 @@ VUE.partie = (function(){
         pagePartieContenu = document.querySelector("#page-partie").innerHTML;
         body = document.querySelector("body");
 
+
     }
 
-    module.afficher = function(nouvelleLargeur, nouvelleHauteur,agirSurClic){
+    module.afficher = function(nouvelleLargeur, nouvelleHauteur,nouveauGroupeBouffeBoulle, agirSurClic){
 
         body.innerHTML = pagePartieContenu;
 
@@ -43,6 +45,9 @@ VUE.partie = (function(){
 
         arrierePlan = new ArrierePlan(canevas);
         arrierePlan.afficher();
+
+        groupeBouffeBoulle = [];
+        afficherGroupeBouffeBoulle(nouveauGroupeBouffeBoulle);
 
         joueurBoulle1 = new JoueurBoulle(canevas);
         joueurBoulle1.afficher("red",largeur/4, hauteur/2);
@@ -76,6 +81,18 @@ VUE.partie = (function(){
           joueurBoulle1.deplacer(deplacementX, deplacementY);
           break;
       }
+    }
+    function afficherGroupeBouffeBoulle(nouveauGroupeBouffeBoulle)
+    {
+      for(var indiceBoulle = 0;indiceBoulle < nouveauGroupeBouffeBoulle.length;indiceBoulle++)
+      {
+        var bouffeBoulle = new BouffeBoulle(canevas);
+        groupeBouffeBoulle[indiceBoulle] = bouffeBoulle;
+        bouffeBoulle.afficher(
+          nouveauGroupeBouffeBoulle[indiceBoulle].x,
+          nouveauGroupeBouffeBoulle[indiceBoulle].y);
+      }
+
     }
 
     return module;

@@ -5,6 +5,14 @@
     var derniereValeurTemporelleMilliseconde;
     var joueur1;
     var joueurActif;
+    var groupeBouffeBoulle;
+    var CONFIGURATION =
+      {
+        ECRAN_LARGEUR: 900,
+        ECRAN_HAUTEUR: 700,
+        JOUEUR_POUSSEE: 400,
+        NOMBRE_BOUFFE_BOULLE: 50
+      };
 
     (function initialiser(){
 
@@ -17,7 +25,8 @@
 
         vuePartie = VUE.partie;
 
-        joueur1 = {enMouvement:false};
+        joueur1 = {};
+        groupeBouffeBoulle = [];
 
         document.addEventListener("DOMContentLoaded", preparerJeu);
 
@@ -46,7 +55,14 @@
     {
         console.log("jeu-boule --> preparerJeu");
 
-        vuePartie.afficher(900, 700, agirSurClic);
+        genererGroupeBouffeBoulle();
+
+        vuePartie.afficher(
+          CONFIGURATION.ECRAN_LARGEUR,
+          CONFIGURATION.ECRAN_HAUTEUR,
+          groupeBouffeBoulle,
+          agirSurClic);
+
         joueur1.numeroJoueur = 1;
         joueurActif = joueur1;
 
@@ -76,9 +92,8 @@
 
       joueurActif.destinationX = destinationX;
       joueurActif.destinationY = destinationY;
-      joueurActif.velociteX = 0,
-      joueurActif.velociteY = 0,
-      joueurActif.pousee = 400;
+      joueurActif.velociteX = 0;
+      joueurActif.velociteY = 0;
     }
 
     function mettreAJourJeu(deltaValeurTemporelleMilliseconde) {
@@ -91,20 +106,22 @@
       joueurActif.distance = Math.sqrt(tx*tx+ty*ty);
 
       if(joueurActif.distance != 0){
-        joueurActif.velociteX = (tx/joueurActif.distance)*joueurActif.pousee;
-        joueurActif.velociteY = (ty/joueurActif.distance)*joueurActif.pousee;
+        joueurActif.velociteX = (tx/joueurActif.distance)*CONFIGURATION.JOUEUR_POUSSEE;
+        joueurActif.velociteY = (ty/joueurActif.distance)*CONFIGURATION.JOUEUR_POUSSEE;
       }
       else {
         joueurActif.velociteX = joueurActif.velociteY = 0;
       }
 
       console.log("jeu-boule --> agirSurClic : joueurActif.distance", joueurActif.distance);
-      if(joueurActif.distance > 1 && joueurActif.distance > joueurActif.pousee*deltaValeurTemporelleMilliseconde){
+      if(joueurActif.distance > 1 &&
+        joueurActif.distance > CONFIGURATION.JOUEUR_POUSSEE*deltaValeurTemporelleMilliseconde){
          vuePartie.deplacerJoueurBoulle(
            joueurActif.numeroJoueur,
            joueurActif.velociteX*deltaValeurTemporelleMilliseconde,
            joueurActif.velociteY*deltaValeurTemporelleMilliseconde);
-       }else if (joueurActif.distance > 1 && joueurActif.distance < joueurActif.pousee*deltaValeurTemporelleMilliseconde) {
+       }else if (joueurActif.distance > 1 &&
+         joueurActif.distance < CONFIGURATION.JOUEUR_POUSSEE*deltaValeurTemporelleMilliseconde) {
          vuePartie.setJoueurBoullePosition(
            joueurActif.numeroJoueur,
            joueurActif.destinationX,
@@ -130,7 +147,22 @@
         animationFrame = requestAnimationFrame(preparerRafraichissementEcran);
 
     }
+    function genererGroupeBouffeBoulle()
+    {
+      for(var indiceBoulle = 0;indiceBoulle < CONFIGURATION.NOMBRE_BOUFFE_BOULLE;indiceBoulle++)
+      {
+        boulleX = obtenirValeurAleatoir(0, CONFIGURATION.ECRAN_LARGEUR);
+        boulleY = obtenirValeurAleatoir(0, CONFIGURATION.ECRAN_HAUTEUR);
+        groupeBouffeBoulle[indiceBoulle] = {x : boulleX, y : boulleY};
+      }
 
+    }
+    function obtenirValeurAleatoir(minimun, maximum)
+    {
+      minimun = Math.ceil(minimun);
+      maximum = Math.floor(maximum);
+      return Math.floor(Math.random() * (maximum - minimun + 1)) + minimun;
+    }
 
 
 

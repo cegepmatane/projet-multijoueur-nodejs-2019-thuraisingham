@@ -1,31 +1,25 @@
-var JoueurBoulle = function(nouveauCanevas){
+var BouffeBoulle = function(nouveauCanevas){
 
     var canevas;
     var couleur;
     var boulle;
     var diametre;
+    var couleur;
 
 
     (function initialiser(){
 
         canevas = nouveauCanevas;
-
-        diametre = 50;
+        couleur = "blue";
+        diametre = 25;
 
     })();
 
-    this.afficher = function(nouvelleCouleur,positionJoueurX, positionJoueurY){
+    this.afficher = function(positionBoulleX, positionBoulleY){
 
-        couleur = nouvelleCouleur;
         boulle = canevas.circle(diametre);
-        boulle.center(positionJoueurX, positionJoueurY).fill(couleur);
+        boulle.center(positionBoulleX, positionBoulleY).fill(couleur);
 
-
-    }
-
-    this.deplacer = function(x, y){
-
-        boulle.dmove(x, y);
 
     }
 
