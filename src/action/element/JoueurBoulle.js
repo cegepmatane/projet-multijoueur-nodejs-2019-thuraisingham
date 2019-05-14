@@ -10,13 +10,14 @@ var JoueurBoulle = function(nouveauCanevas){
 
         canevas = nouveauCanevas;
 
-        diametre = 50;
+
 
     })();
 
-    this.afficher = function(nouvelleCouleur,positionJoueurX, positionJoueurY){
+    this.afficher = function(nouvelleCouleur,positionJoueurX, positionJoueurY, nouveauDiametreJoueur){
 
         couleur = nouvelleCouleur;
+        diametre = nouveauDiametreJoueur;
         boulle = canevas.circle(diametre);
         boulle.center(positionJoueurX, positionJoueurY).fill(couleur);
 
@@ -38,7 +39,16 @@ var JoueurBoulle = function(nouveauCanevas){
 
         boulle.cx(x);
         boulle.cy(y);
+    }
 
+    this.cacher = function(){
+
+      boulle.hide();
+    }
+
+    this.grossir = function(diametre)
+    {
+      boulle.radius(diametre/2);
     }
 
 };

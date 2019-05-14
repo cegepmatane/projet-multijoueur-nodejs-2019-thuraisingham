@@ -32,7 +32,7 @@ VUE.partie = (function(){
 
     }
 
-    module.afficher = function(nouvelleLargeur, nouvelleHauteur,nouveauGroupeBouffeBoulle, agirSurClic){
+    module.afficher = function(nouvelleLargeur, nouvelleHauteur,nouveauDiametreJoueur, nouveauGroupeBouffeBoulle, agirSurClic){
 
         body.innerHTML = pagePartieContenu;
 
@@ -50,7 +50,7 @@ VUE.partie = (function(){
         afficherGroupeBouffeBoulle(nouveauGroupeBouffeBoulle);
 
         joueurBoulle1 = new JoueurBoulle(canevas);
-        joueurBoulle1.afficher("red",largeur/4, hauteur/2);
+        joueurBoulle1.afficher("red",largeur/4, hauteur/2, nouveauDiametreJoueur);
 
         canevas.on('click', agirSurClic);
 
@@ -82,6 +82,16 @@ VUE.partie = (function(){
           break;
       }
     }
+    module.cacherGroupeBouffeBoulle = function(groupeBouffeBoulleMange)
+    {
+      console.log("partie --> cacherGroupeBouffeBoulle --> groupeBouffeBoulleMange.length : ", groupeBouffeBoulleMange.length);
+      for(var indiceBoulle = 0;indiceBoulle < groupeBouffeBoulleMange.length;indiceBoulle++)
+      {
+        groupeBouffeBoulle[groupeBouffeBoulleMange[indiceBoulle]].cacher();
+        console.log ("partie --> cacherGroupeBouffeBoulle : ", groupeBouffeBoulle[groupeBouffeBoulleMange[indiceBoulle]]);
+      }
+    }
+
     function afficherGroupeBouffeBoulle(nouveauGroupeBouffeBoulle)
     {
       for(var indiceBoulle = 0;indiceBoulle < nouveauGroupeBouffeBoulle.length;indiceBoulle++)
@@ -91,6 +101,16 @@ VUE.partie = (function(){
         bouffeBoulle.afficher(
           nouveauGroupeBouffeBoulle[indiceBoulle].x,
           nouveauGroupeBouffeBoulle[indiceBoulle].y);
+      }
+
+    }
+
+    module.grossirJoueurBoulle = function(numeroJoueur, diametre)
+    {
+      switch (numeroJoueur) {
+        case 1:
+          joueurBoulle1.grossir(diametre);
+          break;
       }
 
     }

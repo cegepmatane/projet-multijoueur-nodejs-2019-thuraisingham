@@ -34,5 +34,8 @@ var BouffeBoulle = function(nouveauCanevas){
         boulle.cy(y);
 
     }
+    this.cacher = function(){
+      boulle.hide();
+    }
 
 };
