@@ -32,7 +32,7 @@ VUE.partie = (function(){
 
     }
 
-    module.afficher = function(nouvelleLargeur, nouvelleHauteur,nouveauDiametreJoueur, nouveauGroupeBouffeBoulle, agirSurClic){
+    module.afficher = function(nouvelleLargeur, nouvelleHauteur,joueur1, nouveauGroupeBouffeBoulle, agirSurClic){
 
         body.innerHTML = pagePartieContenu;
 
@@ -50,13 +50,16 @@ VUE.partie = (function(){
         afficherGroupeBouffeBoulle(nouveauGroupeBouffeBoulle);
 
         joueurBoulle1 = new JoueurBoulle(canevas);
-        joueurBoulle1.afficher("red",largeur/4, hauteur/2, nouveauDiametreJoueur);
+        joueurBoulle1.afficher(
+          joueur1.couleur,
+          joueur1.diametre,
+          joueur1.positionX,
+          joueur1.positionY,);
 
         canevas.on('click', agirSurClic);
 
-
-
     }
+    
     module.getJoueurBoullePosition = function(numeroJoueur){
       switch (numeroJoueur) {
         case 1:

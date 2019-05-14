@@ -29,7 +29,18 @@
 
         vuePartie = VUE.partie;
 
-        joueur1 = {};
+        joueur1 = new MODELE.Joueur(
+          1,
+          "red",
+          CONFIGURATION.JOUEUR_DIAMETRE_INITIAL,
+          CONFIGURATION.ECRAN_LARGEUR/4,
+          CONFIGURATION.ECRAN_HAUTEUR/2,
+          CONFIGURATION.ECRAN_LARGEUR/4,
+          CONFIGURATION.ECRAN_HAUTEUR/2,
+          0,
+          0,
+          0);
+
         groupeBouffeBoulle = [];
         groupeBouffeBoulleMange = [];
 
@@ -62,15 +73,16 @@
 
         genererGroupeBouffeBoulle();
 
+
         vuePartie.afficher(
           CONFIGURATION.ECRAN_LARGEUR,
           CONFIGURATION.ECRAN_HAUTEUR,
-          CONFIGURATION.JOUEUR_DIAMETRE_INITIAL,
+          joueur1,
           groupeBouffeBoulle,
           agirSurClic);
 
-        joueur1.numeroJoueur = 1;
-        joueur1.diametre = CONFIGURATION.JOUEUR_DIAMETRE_INITIAL;
+        //joueur1.numeroJoueur = 1;
+        //joueur1.diametre = CONFIGURATION.JOUEUR_DIAMETRE_INITIAL;
         joueurActif = joueur1;
 
 
