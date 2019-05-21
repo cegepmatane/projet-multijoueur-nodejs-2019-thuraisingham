@@ -2,10 +2,16 @@ var VUE = VUE || {};
 
 VUE.accueil = (function(){
 
-    var accueil = {};
+    var module = {};
+    var accueil = this;
 
     var pageAccueilContenu;
     var body;
+
+    var formulaireAuthentification;
+    var pseudonyme;
+    var boutonAuthentification;
+    var nouveauPseudonyme;
 
     (function initialiser(){
 
@@ -20,13 +26,31 @@ VUE.accueil = (function(){
 
     }
 
-    accueil.afficher = function(){
+    module.afficher = function(nouveauPseudonymeObtenu){
 
+        accueil.nouveauPseudonymeObtenu = nouveauPseudonymeObtenu;
+        console.log("VUE.accueil module.afficher --> accueil.nouveauPseudonymeObtenu : ", accueil.nouveauPseudonymeObtenu);
         body.innerHTML = pageAccueilContenu;
+        formulaireAuthentification = document.getElementById("formulaire-authentification");
+        formulaireAuthentification.addEventListener("submit", obtenirPseudonyme)
+
+        pseudonyme = document.getElementById("pseudonyme");
+
+        boutonAuthentification = document.getElementById("bouton-authentification");
 
     }
 
+    function obtenirPseudonyme(evenement){
 
-    return accueil;
+       evenement.preventDefault();
+
+       boutonAuthentification.disabled = true;
+       console.log("VUE.accueil obtenirPseudonyme -->  accueil.nouveauPseudonymeObtenu : ",  accueil.nouveauPseudonymeObtenu);
+       accueil.nouveauPseudonymeObtenu(pseudonyme.value);
+
+   }
+
+
+    return module;
 
 })();
