@@ -1,32 +1,72 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="lib/svg.min.js"></script>
-        <script src="lib/MultiNode.js"></script>
-        <script src="action/modele/Joueur.js"></script>
-        <script src="action/element/ArrierePlan.js"></script>
-        <script src="action/element/JoueurBoulle.js"></script>
-        <script src="action/element/BouffeBoulle.js"></script>
-      <!--
-        <script src="action/modele/Palette.js"></script>
+      <meta charset="utf-8">
+      <title></title>
+        <script src="lib/easeljs-0.8.2.min.js"></script>
+      <style>
+        body
+        {
+          margin:0;
+        }
+      </style>
 
+      <script src="lib/svg.min.js"></script>
+      <script src="lib/MultiNode.js"></script>
+      <script src="action/vue/finPartie.js"></script>
+      <script src="action/vue/accueil.js"></script>
+      <script src="action/vue/partie.js"></script>
+      <script src="action/modele/Joueur.js"></script>
+      <script src="action/element/ArrierePlan.js"></script>
+      <script src="action/element/JoueurBoulle.js"></script>
+      <script src="action/element/BouffeBoulle.js"></script>
+    <!--
 
-        <script src="action/element/EnsemblePalette.js"></script>
+      <script src="action/modele/Palette.js"></script>
+      <script src="action/element/EnsemblePalette.js"></script>
+      <script src="action/element/PanneauPointage.js"></script>
+      <script src="action/element/Explosion.js"></script>-->
 
-        <script src="action/element/PanneauPointage.js"></script>
-        <script src="action/element/Explosion.js"></script>-->
-        <script src="action/vue/Partie.js"></script>
-        <script src="action/jeu-boule.js"></script>
-        <style>
-          body
-          {
-            margin:0;
-          }
-        </style>
+      <script src="action/partie.js"></script>
+      <script src="action/application.js"></script>
+
     </head>
     <body>
-        <script type="text/plain" id="page-partie">
-            <div id="canevas"></div>
-        </script>
+
+
+
+      <script type="plain/text" id="page-accueil">
+         <div>
+             <h1>Accueil du jeu</h1>
+             <p>
+                 Jeu Bouffe Boulle
+             </p>
+             <a href="#jouer">Jouer</a>
+         </div>
+
+
+      </script>
+
+      <script type="text/plain" id="page-partie">
+          <div id="canevas"></div>
+          <h1>Jeu</h1>
+          //<canvas id="dessin" width="800" height="500"></canvas>
+          <a href="#accueil">Accueil</a>
+          <a href="#fin-partie-gagnee">Fin partie gagnée</a>
+          <a href="#fin-partie-perdue">Fin partie perdue</a>
+      </script>
+
+      <script type="plain/text" id="page-fin-partie">
+
+          <div>
+              <h1>Fin de la partie</h1>
+              <h2>{texte-fin-partie}</h2>
+              <a href="#accueil">Accueil</a>
+          </div>
+
+      </script>
+
+
+
     </body>
 </html>

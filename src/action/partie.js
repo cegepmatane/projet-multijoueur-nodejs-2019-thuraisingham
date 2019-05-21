@@ -1,5 +1,9 @@
-(function(){
+var CONTROLEUR = CONTROLEUR || {};
 
+CONTROLEUR.partie = (function(){
+
+    var module = {};
+    
     var vuePartie;
     var animationFrame;
     var derniereValeurTemporelleMilliseconde;
@@ -25,7 +29,7 @@
         multiNode.confirmerAuthentification = confirmerAuthentification;
         multiNode.apprendreAuthentification = apprendreAuthentification;
         multiNode.recevoirVariable = recevoirVariable;
-        multiNode.connecter();
+        //multiNode.connecter();
 
         vuePartie = VUE.partie;
 
@@ -44,7 +48,7 @@
         groupeBouffeBoulle = [];
         groupeBouffeBoulleMange = [];
 
-        document.addEventListener("DOMContentLoaded", preparerJeu);
+        //document.addEventListener("DOMContentLoaded", preparerJeu);
 
     })();
 
@@ -67,7 +71,7 @@
     {
         console.log("jeu-boule --> recevoirVariable");
     }
-    function preparerJeu(evenement)
+    module.preparerJeu = function(pseudonyme)
     {
         console.log("jeu-boule --> preparerJeu");
 
@@ -251,7 +255,7 @@
 
     }
 
-
+    return module;
 
 
 })();

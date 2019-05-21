@@ -5,6 +5,7 @@ VUE.partie = (function(){
     var module = {};
 
     var pagePartieContenu;
+    var pageAccueil;
     var body;
 
     var canevas;
@@ -25,7 +26,7 @@ VUE.partie = (function(){
     })();
 
     function preparerVue(evenement){
-
+        
         pagePartieContenu = document.querySelector("#page-partie").innerHTML;
         body = document.querySelector("body");
 
@@ -59,7 +60,7 @@ VUE.partie = (function(){
         canevas.on('click', agirSurClic);
 
     }
-    
+
     module.getJoueurBoullePosition = function(numeroJoueur){
       switch (numeroJoueur) {
         case 1:
