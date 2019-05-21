@@ -26,9 +26,8 @@ VUE.accueil = (function(){
 
     }
 
-    module.afficher = function(nouveauPseudonymeObtenu){
+    module.afficher = function(){
 
-        accueil.nouveauPseudonymeObtenu = nouveauPseudonymeObtenu;
         console.log("VUE.accueil module.afficher --> accueil.nouveauPseudonymeObtenu : ", accueil.nouveauPseudonymeObtenu);
         body.innerHTML = pageAccueilContenu;
         formulaireAuthentification = document.getElementById("formulaire-authentification");
@@ -46,10 +45,11 @@ VUE.accueil = (function(){
 
        boutonAuthentification.disabled = true;
        console.log("VUE.accueil obtenirPseudonyme -->  accueil.nouveauPseudonymeObtenu : ",  accueil.nouveauPseudonymeObtenu);
-       accueil.nouveauPseudonymeObtenu(pseudonyme.value);
+       module.nouveauPseudonymeObtenu(pseudonyme.value);
 
    }
 
+   module.nouveauPseudonymeObtenu = function(nouveauPseudonyme){};
 
     return module;
 

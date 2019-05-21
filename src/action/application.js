@@ -11,6 +11,7 @@
     (function initialiser(){
 
         vueAccueil = VUE.accueil;
+        vueAccueil.nouveauPseudonymeObtenu = nouveauPseudonymeObtenu;
         vuePartie = VUE.partie;
         vueFinPartie = VUE.finPartie;
         partie = CONTROLEUR.partie;
@@ -22,7 +23,7 @@
 
     function preparerApplication()
     {
-        vueAccueil.afficher(nouveauPseudonymeObtenu);
+        vueAccueil.afficher();
     }
 
     function nouveauPseudonymeObtenu(nouveauPseudonyme)
@@ -48,7 +49,7 @@
 
     function naviguerVueAccueil()
     {
-        vueAccueil.afficher(nouveauPseudonymeObtenu);
+        vueAccueil.afficher();
     }
 
   function naviguerVuePartie()
