@@ -2,6 +2,7 @@ var MODELE = MODELE || {};
 
 MODELE.Joueur = function(
   numeroJoueur,
+  pseudonyme,
   couleur,
   diametre,
   positionX,
@@ -15,6 +16,7 @@ MODELE.Joueur = function(
     joueur = this;
   //  this.pointage;
     this.numeroJoueur;
+    this.pseudonyme;
     this.couleur;
     this.diametre;
     this.positionX;
@@ -31,6 +33,7 @@ MODELE.Joueur = function(
         //joueur.pointage = pointage;
         //joueur.joueurActif = joueurActif;
         joueur.numeroJoueur = numeroJoueur;
+        joueur.pseudonyme = pseudonyme;
         joueur.couleur = couleur;
         joueur.diametre = diametre;
         joueur.positionX = positionX;
