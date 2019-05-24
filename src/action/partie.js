@@ -53,24 +53,36 @@ CONTROLEUR.partie = (function(){
     function confirmerAuthentification(autresParticipants)
     {
         console.log("jeu-boule --> confirmerAuthentification");
-        creerJoueurLocal(
+        ajouterAutresParticipants(autresParticipants);
+
+        joueurLocal = creerJoueur(
           derterminerNumeroJoueur(autresParticipants),
           pseudonymeLocal);
-        demarrerJeu();
+        listeJoueur[joueurLocal.numeroJoueur] = joueurLocal;
+
+        if(listeJoueur.length > 1) demarrerJeu();
     }
 
-    function derterminerNumeroJoueur(autresParticipants)
+    function derterminerNumeroJoueur(autresParticipants = null)
     {
-          return autresParticipants.length +1;
+      if(autresParticipants)
+      {
+        return autresParticipants.length ;
+      }
+      else
+      {
+        return listeJoueur.length;
+      }
+
     }
 
     function derterminerCouleurJoueur(numeroJoueur)
     {
         switch (numeroJoueur) {
-          case 1:
+          case 0:
             return "red";
             break;
-          case 2:
+          case 1:
             return "blue";
             break;
         }
@@ -80,14 +92,14 @@ CONTROLEUR.partie = (function(){
     function derterminerPositionInitialeJoueur(numeroJoueur)
     {
         switch (numeroJoueur) {
-          case 1:
+          case 0:
             return positionInitialeJoueur =
                 {
                   x: CONFIGURATION.ECRAN_LARGEUR*0.25,
                   y: CONFIGURATION.ECRAN_HAUTEUR/2
                 };
             break;
-          case 2:
+          case 1:
             return positionInitialeJoueur =
                 {
                   x: CONFIGURATION.ECRAN_LARGEUR*0.75,
@@ -98,11 +110,11 @@ CONTROLEUR.partie = (function(){
         return null;
     }
 
-    function creerJoueurLocal(numeroJoueur, pseudonyme)
+    function creerJoueur(numeroJoueur, pseudonyme)
     {
       var positionInitialeJoueur = derterminerPositionInitialeJoueur(numeroJoueur);
       var couleurJoueur = derterminerCouleurJoueur(numeroJoueur);
-      joueurLocal = new MODELE.Joueur(
+      return new MODELE.Joueur(
           numeroJoueur,
           pseudonyme,
           couleurJoueur,
@@ -116,9 +128,36 @@ CONTROLEUR.partie = (function(){
           0);
     }
 
+    function ajouterAutresParticipants(autresParticipants)
+    {
+        for(
+          var indiceParticipant = 0;
+          indiceParticipant < autresParticipants.length;
+          indiceParticipant++)
+        {
+          var autreJoueur =
+              creerJoueur(
+                indiceParticipant,
+                autresParticipants[indiceParticipant]);
+          listeJoueur[autreJoueur.numeroJoueur] = autreJoueur;
+        }
+    }
+
+    function ajouterAutreJoueur(pseudonyme)
+    {
+        var autreJoueur =
+              creerJoueur(
+                derterminerNumeroJoueur(),
+                pseudonyme);
+          listeJoueur[autreJoueur.numeroJoueur] = autreJoueur;
+
+    }
+
     function apprendreAuthentification(pseudonyme)
     {
         console.log("jeu-boule --> apprendreAuthentification");
+        ajouterAutreJoueur(pseudonyme);
+        if(listeJoueur.length > 1) demarrerJeu();
     }
 
     function recevoirVariable(variable)
@@ -141,7 +180,7 @@ CONTROLEUR.partie = (function(){
         vuePartie.afficher(
           CONFIGURATION.ECRAN_LARGEUR,
           CONFIGURATION.ECRAN_HAUTEUR,
-          joueurLocal,
+          listeJoueur,
           groupeBouffeBoulle,
           agirSurClic);
 
