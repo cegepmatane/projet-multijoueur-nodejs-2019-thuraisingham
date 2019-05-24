@@ -23,6 +23,8 @@ CONTROLEUR.partie = (function(){
         POID_AUGMENTATION : 10
       };
 
+      var appliquerFinPartieExterne;
+
     (function initialiser(){
 
         multiNode = new MultiNode();
@@ -46,8 +48,10 @@ CONTROLEUR.partie = (function(){
 
     function confirmerConnexion()
     {
-        console.log("CONTROLEUR.partie --> confirmerConnexion");
-        multiNode.demanderAuthentification(pseudonyme);
+        //console.log("CONTROLEUR.partie --> confirmerConnexion");
+        //console.log("CONTROLEUR.partie --> confirmerConnexion --> pseudonyme",pseudonyme);
+        //console.log("CONTROLEUR.partie --> confirmerConnexion --> pseudonymeLocal",pseudonymeLocal);
+        multiNode.demanderAuthentification(pseudonymeLocal);
     }
 
     function confirmerAuthentification(autresParticipants)
@@ -85,10 +89,31 @@ CONTROLEUR.partie = (function(){
           groupeBouffeBoulleMange = JSON.parse(variable.valeur);
           cacherGroupeBouffeBoulle();
           grossirJoueurBoulle(numeroJoueur);
+          if(testerFinPartie())
+          {
+            multiNode.posterVariableTextuelle(
+              "finPartie", "");
+          }
+        break;
+        case "finPartie":
+            appliquerFinPartieExterne(listeJoueur);
         break;
 
+      }
+    }
+
+    function testerFinPartie()
+    {
+      var finPartie = true;
+      for(
+        var indiceBouffeBoulle = 0;
+        indiceBouffeBoulle<groupeBouffeBoulle.length;
+        indiceBouffeBoulle++)
+      {
+        if(groupeBouffeBoulle[indiceBouffeBoulle].visible) return false;
 
       }
+      return true;
     }
 
     function isInitialisationTerrain()
@@ -205,6 +230,7 @@ CONTROLEUR.partie = (function(){
     function apprendreAuthentification(pseudonyme)
     {
         console.log("CONTROLEUR.partie --> apprendreAuthentification");
+        console.log("CONTROLEUR.partie --> apprendreAuthentification --> pseudonyme : ", pseudonyme);
         ajouterAutreJoueur(pseudonyme);
         //if(listeJoueur.length > 1) demarrerJeu();
         if(isInitialisationTerrain())
@@ -214,10 +240,11 @@ CONTROLEUR.partie = (function(){
 
     }
 
-    module.preparerJeu = function(pseudonyme)
+    module.preparerJeu = function(pseudonyme,appliquerFinPartie)
     {
         console.log("CONTROLEUR.partie --> preparerJeu");
         pseudonymeLocal = pseudonyme;
+        appliquerFinPartieExterne = appliquerFinPartie;
         multiNode.connecter();
 
 
@@ -226,7 +253,8 @@ CONTROLEUR.partie = (function(){
     function demarrerJeu()
     {
         genererGroupeBouffeBoulle();
-
+        CONFIGURATION.ECRAN_LARGEUR = (window.innerWidth);
+        CONFIGURATION.ECRAN_HAUTEUR = (window.innerHeight);
         vuePartie.afficher(
           CONFIGURATION.ECRAN_LARGEUR,
           CONFIGURATION.ECRAN_HAUTEUR,

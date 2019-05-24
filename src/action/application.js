@@ -6,7 +6,7 @@
     //var vuePartie;
     var vueFinPartie;
     var partie;
-
+    var listeJoueurGagnantPerdant;
 
     (function initialiser(){
 
@@ -40,11 +40,10 @@
             naviguerVueAccueil();
         }else if(hash.match(/^#jouer/)){
             naviguerVuePartie();
-        }else if(hash.match(/^#fin-partie-gagnee/)){
-            naviguerVueFinPartie(gagnee = true);
-        }else if(hash.match(/^#fin-partie-perdue/)){
-            naviguerVueFinPartie(gagnee = false);
+        }else if(hash.match(/^#fin-partie/)){
+            naviguerVueFinPartie(listeJoueurGagnantPerdant);
         }
+
     }
 
     function naviguerVueAccueil()
@@ -54,12 +53,17 @@
 
   function naviguerVuePartie()
   {
-      partie.preparerJeu(pseudonyme);
+      partie.preparerJeu(pseudonyme, appliquerFinPartie);
   }
 
    function naviguerVueFinPartie(gagnee)
    {
         vueFinPartie.afficher(gagnee);
+   }
+   function appliquerFinPartie(listeJoueur)
+   {
+     listeJoueurGagnantPerdant = listeJoueur;
+     window.location = "#fin-partie";
    }
 
 })();

@@ -22,21 +22,39 @@ VUE.finPartie = (function(){
 
     }
 
-    finPartie.afficher = function(gagnee){
+    finPartie.afficher = function(listeJoueurGagnantPerdant){
 
-        var pageFinPartieContenuReponse = pageFinPartieContenu;
-
-        if(gagnee){
-
-            pageFinPartieContenuReponse = pageFinPartieContenuReponse.replace("{texte-fin-partie}", "Vous avez gagné!");
-
-        }else{
-
-            pageFinPartieContenuReponse = pageFinPartieContenuReponse.replace("{texte-fin-partie}", "Vous avez perdu!");
-
+        body.innerHTML = pageFinPartieContenu;
+        var liste = document.querySelector("ul");
+        console.log("finPartie --> partie.afficher --> liste : ", liste);
+        var numeroJoueur = 0;
+        var pointage = 0;
+        for(
+          var indiceJoueurGagnantPerdant = 0;
+          indiceJoueurGagnantPerdant < listeJoueurGagnantPerdant.length;
+          indiceJoueurGagnantPerdant++)
+        {
+          if(listeJoueurGagnantPerdant[indiceJoueurGagnantPerdant].diametre > pointage)
+          {
+            numeroJoueur = indiceJoueurGagnantPerdant;
+            pointage = listeJoueurGagnantPerdant[indiceJoueurGagnantPerdant].diametre;
+          }
+        }
+        for(
+          var indiceJoueurGagnantPerdant = 0;
+          indiceJoueurGagnantPerdant < listeJoueurGagnantPerdant.length;
+          indiceJoueurGagnantPerdant++)
+        {
+          liste.innerHTML +=
+              "<li>"+
+            listeJoueurGagnantPerdant[indiceJoueurGagnantPerdant].pseudonyme+
+            " " +
+            listeJoueurGagnantPerdant[indiceJoueurGagnantPerdant].diametre/2+
+            " " +
+            (indiceJoueurGagnantPerdant == numeroJoueur?"gagnant" : "perdant");
+              "</li>";
         }
 
-        body.innerHTML = pageFinPartieContenuReponse;
 
     }
 

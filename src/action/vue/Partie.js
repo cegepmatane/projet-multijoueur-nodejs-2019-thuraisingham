@@ -64,6 +64,7 @@ VUE.partie = (function(){
           listeJoueurBoulle[indiceJoueur] = new JoueurBoulle(canevas);
           listeJoueurBoulle[indiceJoueur].afficher(
             listeJoueur[indiceJoueur].couleur,
+            listeJoueur[indiceJoueur].pseudonyme,
             listeJoueur[indiceJoueur].diametre,
             listeJoueur[indiceJoueur].positionX,
             listeJoueur[indiceJoueur].positionY);
