@@ -80,6 +80,14 @@ CONTROLEUR.partie = (function(){
           listeJoueur[numeroJoueur].velociteX = 0;
           listeJoueur[numeroJoueur].velociteY = 0;
         break;
+
+        case "groupeBouffeBoulleMange":
+          groupeBouffeBoulleMange = JSON.parse(variable.valeur);
+          cacherGroupeBouffeBoulle();
+          grossirJoueurBoulle(numeroJoueur);
+        break;
+
+
       }
     }
 
@@ -349,19 +357,20 @@ CONTROLEUR.partie = (function(){
       //console.log("CONTROLEUR.partie --> agirSurClic : joueurLocal.distance", joueurLocal.distance);
 
       // console.log("CONTROLEUR.partie --> detecterCollisionBoulle --> groupeBouffeBoulleMange: ",groupeBouffeBoulleMange);
-       /*if (detecterCollisionBoulle())
+       if (detecterCollisionBoulle())
        {
-         cacherGroupeBouffeBoulle();
-         grossirJoueurBoulle();
-
-       }*/
+         multiNode.posterVariableTextuelle(
+           "groupeBouffeBoulleMange-"+ joueurLocal.numeroJoueur,
+           JSON.stringify(groupeBouffeBoulleMange)
+         );
+       }
 
     }
 
-    function grossirJoueurBoulle()
+    function grossirJoueurBoulle(numeroJoueur)
     {
-      joueurLocal.diametre += CONFIGURATION.POID_AUGMENTATION;
-      vuePartie.grossirJoueurBoulle(joueurLocal.numeroJoueur, joueurLocal.diametre);
+      listeJoueur[numeroJoueur].diametre += CONFIGURATION.POID_AUGMENTATION;
+      vuePartie.grossirJoueurBoulle(numeroJoueur, listeJoueur[numeroJoueur].diametre);
     }
 
     function cacherGroupeBouffeBoulle()

@@ -4,23 +4,24 @@ var JoueurBoulle = function(nouveauCanevas){
     var couleur;
     var boulle;
     var diametre;
+    var pseudonyme;
 
 
     (function initialiser(){
 
         canevas = nouveauCanevas;
 
-
-
     })();
 
     this.afficher = function(
         nouvelleCouleur,
+        nouveauPseudonyme,
         nouveauDiametre,
         nouvellePositionX,
         nouvellePositionY,){
 
         couleur = nouvelleCouleur;
+        pseudonyme = nouveauPseudonyme;
         diametre =  nouveauDiametre;
         boulle = canevas.circle(diametre);
         boulle.center(nouvellePositionX, nouvellePositionY).fill(couleur);
