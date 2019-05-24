@@ -46,13 +46,13 @@ CONTROLEUR.partie = (function(){
 
     function confirmerConnexion()
     {
-        console.log("jeu-boule --> confirmerConnexion");
+        console.log("CONTROLEUR.partie --> confirmerConnexion");
         multiNode.demanderAuthentification(pseudonyme);
     }
 
     function confirmerAuthentification(autresParticipants)
     {
-        console.log("jeu-boule --> confirmerAuthentification");
+        console.log("CONTROLEUR.partie --> confirmerAuthentification");
         ajouterAutresParticipants(autresParticipants);
 
         joueurLocal = creerJoueur(
@@ -60,7 +60,39 @@ CONTROLEUR.partie = (function(){
           pseudonymeLocal);
         listeJoueur[joueurLocal.numeroJoueur] = joueurLocal;
 
-        if(listeJoueur.length > 1) demarrerJeu();
+    }
+    function recevoirVariable(variable){
+
+    console.log("Surcharge de recevoirVariable " + variable.cle + " = " + variable.valeur);
+
+    switch (variable.cle) {
+
+        case "terrain":
+          groupeBouffeBoulle = JSON.parse(variable.valeur);
+          demarrerJeu();
+        break;
+      }
+    }
+
+    function isInitialisationTerrain()
+    {
+      console.log("CONTROLEUR.partie --> isInitialisationTerrain listeJoueur.length : ",
+          listeJoueur.length);
+      console.log("CONTROLEUR.partie --> isInitialisationTerrain joueurLocal.numeroJoueur : ",
+          joueurLocal.numeroJoueur);
+      console.log("CONTROLEUR.partie --> isInitialisationTerrain listeJoueur.length > 1 && joueurLocal.numeroJoueur == 0 : ",
+          listeJoueur.length > 1 && joueurLocal.numeroJoueur == 0);
+
+      return listeJoueur.length > 1 && joueurLocal.numeroJoueur == 0;
+    }
+
+    function initialiserTerrain()
+    {
+      console.log("CONTROLEUR.partie --> initialiserTerrain");
+      var groupeBouffeBoulle = genererGroupeBouffeBoulle();
+      multiNode.posterVariableTextuelle(
+        "terrain",
+        JSON.stringify(groupeBouffeBoulle));
     }
 
     function derterminerNumeroJoueur(autresParticipants = null)
@@ -155,18 +187,19 @@ CONTROLEUR.partie = (function(){
 
     function apprendreAuthentification(pseudonyme)
     {
-        console.log("jeu-boule --> apprendreAuthentification");
+        console.log("CONTROLEUR.partie --> apprendreAuthentification");
         ajouterAutreJoueur(pseudonyme);
-        if(listeJoueur.length > 1) demarrerJeu();
+        //if(listeJoueur.length > 1) demarrerJeu();
+        if(isInitialisationTerrain())
+        {
+           initialiserTerrain(); 
+        }
+
     }
 
-    function recevoirVariable(variable)
-    {
-        console.log("jeu-boule --> recevoirVariable");
-    }
     module.preparerJeu = function(pseudonyme)
     {
-        console.log("jeu-boule --> preparerJeu");
+        console.log("CONTROLEUR.partie --> preparerJeu");
         pseudonymeLocal = pseudonyme;
         multiNode.connecter();
 
@@ -205,7 +238,7 @@ CONTROLEUR.partie = (function(){
         var x = evenement.layerX - canevas.parent().offsetLeft
     ,  y = evenement.layerY*/
 
-    console.log("jeu-boule --> agirSurClic");
+    console.log("CONTROLEUR.partie --> agirSurClic");
     determinerDirectionJoueur(evenement.layerX, evenement.layerY);
     }
 
@@ -236,7 +269,7 @@ CONTROLEUR.partie = (function(){
         joueurLocal.velociteX = joueurLocal.velociteY = 0;
       }
 
-      //console.log("jeu-boule --> agirSurClic : joueurLocal.distance", joueurLocal.distance);
+      //console.log("CONTROLEUR.partie --> agirSurClic : joueurLocal.distance", joueurLocal.distance);
       if(joueurLocal.distance > 1 &&
         joueurLocal.distance > CONFIGURATION.JOUEUR_POUSSEE*deltaValeurTemporelleMilliseconde){
          vuePartie.deplacerJoueurBoulle(
@@ -250,7 +283,7 @@ CONTROLEUR.partie = (function(){
            joueurLocal.destinationX,
            joueurLocal.destinationY);
        }
-      // console.log("jeu-boule --> detecterCollisionBoulle --> groupeBouffeBoulleMange: ",groupeBouffeBoulleMange);
+      // console.log("CONTROLEUR.partie --> detecterCollisionBoulle --> groupeBouffeBoulleMange: ",groupeBouffeBoulleMange);
        if (detecterCollisionBoulle())
        {
          cacherGroupeBouffeBoulle();
@@ -297,13 +330,14 @@ CONTROLEUR.partie = (function(){
 
     function genererGroupeBouffeBoulle()
     {
+      var groupeBouffeBoulle = [];
       for(var indiceBoulle = 0;indiceBoulle < CONFIGURATION.NOMBRE_BOUFFE_BOULLE;indiceBoulle++)
       {
         boulleX = obtenirValeurAleatoir(0, CONFIGURATION.ECRAN_LARGEUR);
         boulleY = obtenirValeurAleatoir(0, CONFIGURATION.ECRAN_HAUTEUR);
         groupeBouffeBoulle[indiceBoulle] = {x : boulleX, y : boulleY, visible : true};
       }
-
+      return groupeBouffeBoulle;
     }
 
     function obtenirValeurAleatoir(minimun, maximum)
@@ -327,24 +361,24 @@ CONTROLEUR.partie = (function(){
           var deltaY;
           var rayonBouffeBoule = CONFIGURATION.BOUFFE_BOULLE_DIAMETRE / 2;
           var rayonJoueur = joueurLocal.diametre / 2;
-          //console.log("jeu-boule --> detecterCollisionBoulle --> rayonBouffeBoule : ",rayonBouffeBoule);
-          //console.log("jeu-boule --> detecterCollisionBoulle --> rayonJoueur : ",rayonJoueur);
+          //console.log("CONTROLEUR.partie --> detecterCollisionBoulle --> rayonBouffeBoule : ",rayonBouffeBoule);
+          //console.log("CONTROLEUR.partie --> detecterCollisionBoulle --> rayonJoueur : ",rayonJoueur);
 
 
           sommeRayon = rayonBouffeBoule + rayonJoueur;
-          //console.log("jeu-boule --> detecterCollisionBoulle --> sommeRayon*** : ",sommeRayon);
+          //console.log("CONTROLEUR.partie --> detecterCollisionBoulle --> sommeRayon*** : ",sommeRayon);
           deltaX = groupeBouffeBoulle[indiceBoulle].x - positionJoueurX;
-          //console.log("jeu-boule --> detecterCollisionBoulle --> deltaX : ",deltaX);
+          //console.log("CONTROLEUR.partie --> detecterCollisionBoulle --> deltaX : ",deltaX);
           deltaY = groupeBouffeBoulle[indiceBoulle].y - positionJoueurY;
-          //console.log("jeu-boule --> detecterCollisionBoulle --> deltaY : ",deltaY);
-          //console.log("jeu-boule --> detecterCollisionBoulle --> Math.sqrt : ",Math.sqrt((deltaX * deltaX) + (deltaY * deltaY)));
-          //console.log("jeu-boule --> detecterCollisionBoulle --> ******groupeBouffeBoulleMange.lenght: ",groupeBouffeBoulleMange.length);
+          //console.log("CONTROLEUR.partie --> detecterCollisionBoulle --> deltaY : ",deltaY);
+          //console.log("CONTROLEUR.partie --> detecterCollisionBoulle --> Math.sqrt : ",Math.sqrt((deltaX * deltaX) + (deltaY * deltaY)));
+          //console.log("CONTROLEUR.partie --> detecterCollisionBoulle --> ******groupeBouffeBoulleMange.lenght: ",groupeBouffeBoulleMange.length);
           if (sommeRayon > Math.sqrt((deltaX * deltaX) + (deltaY * deltaY))) {
             var longeurGroupeBouffeBoulleMange = groupeBouffeBoulleMange.length;
-            //console.log("jeu-boule --> detecterCollisionBoulle --> longeurGroupeBouffeBoulleMange : ",longeurGroupeBouffeBoulleMange);
+            //console.log("CONTROLEUR.partie --> detecterCollisionBoulle --> longeurGroupeBouffeBoulleMange : ",longeurGroupeBouffeBoulleMange);
             groupeBouffeBoulleMange[longeurGroupeBouffeBoulleMange] = indiceBoulle;
 
-          //  console.log("jeu-boule --> detecterCollisionBoulle --> indiceBoulle : ",indiceBoulle);
+          //  console.log("CONTROLEUR.partie --> detecterCollisionBoulle --> indiceBoulle : ",indiceBoulle);
           }
       }
     }
