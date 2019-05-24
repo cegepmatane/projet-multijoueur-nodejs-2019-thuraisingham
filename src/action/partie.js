@@ -65,11 +65,20 @@ CONTROLEUR.partie = (function(){
 
     console.log("Surcharge de recevoirVariable " + variable.cle + " = " + variable.valeur);
 
-    switch (variable.cle) {
+    [cle, numeroJoueur] = variable.cle.split("-");
+    switch (cle) {
 
         case "terrain":
           groupeBouffeBoulle = JSON.parse(variable.valeur);
           demarrerJeu();
+        break;
+
+        case "directionJoueur":
+          directionJoueur = JSON.parse(variable.valeur);
+          listeJoueur[numeroJoueur].destinationX = directionJoueur.destinationX;
+          listeJoueur[numeroJoueur].destinationY = directionJoueur.destinationY;
+          listeJoueur[numeroJoueur].velociteX = 0;
+          listeJoueur[numeroJoueur].velociteY = 0;
         break;
       }
     }
@@ -192,7 +201,7 @@ CONTROLEUR.partie = (function(){
         //if(listeJoueur.length > 1) demarrerJeu();
         if(isInitialisationTerrain())
         {
-           initialiserTerrain(); 
+           initialiserTerrain();
         }
 
     }
@@ -239,19 +248,26 @@ CONTROLEUR.partie = (function(){
     ,  y = evenement.layerY*/
 
     console.log("CONTROLEUR.partie --> agirSurClic");
-    determinerDirectionJoueur(evenement.layerX, evenement.layerY);
+    //determinerDirectionJoueur(evenement.layerX, evenement.layerY);
+    multiNode.posterVariableTextuelle(
+      "directionJoueur-"+ joueurLocal.numeroJoueur,
+      JSON.stringify(
+        {
+          destinationX: evenement.layerX,
+          destinationY: evenement.layerY
+        }
+      ));
     }
 
-    function determinerDirectionJoueur(destinationX, destinationY)
+    /*function determinerDirectionJoueur(destinationX, destinationY)
     {
-
       joueurLocal.destinationX = destinationX;
       joueurLocal.destinationY = destinationY;
       joueurLocal.velociteX = 0;
       joueurLocal.velociteY = 0;
-    }
+    }*/
 
-    function mettreAJourJeu(deltaValeurTemporelleMilliseconde) {
+    function _mettreAJourJeu(deltaValeurTemporelleMilliseconde) {
 
       var [positionX, positionY] =
        vuePartie.getJoueurBoullePosition(joueurLocal.numeroJoueur);
@@ -288,8 +304,57 @@ CONTROLEUR.partie = (function(){
        {
          cacherGroupeBouffeBoulle();
          grossirJoueurBoulle();
-
        }
+    }
+
+    function mettreAJourJeu(deltaValeurTemporelleMilliseconde)
+    {
+      for(
+        var indiceJoueur = 0;
+        indiceJoueur < listeJoueur.length;
+        indiceJoueur++)
+      {
+        var [positionX, positionY] =
+         vuePartie.getJoueurBoullePosition(listeJoueur[indiceJoueur].numeroJoueur);
+         listeJoueur[indiceJoueur].x = positionX;
+         listeJoueur[indiceJoueur].y = positionY;
+         var tx = listeJoueur[indiceJoueur].destinationX - listeJoueur[indiceJoueur].x;
+         var ty = listeJoueur[indiceJoueur].destinationY - listeJoueur[indiceJoueur].y;
+         listeJoueur[indiceJoueur].distance = Math.sqrt(tx*tx+ty*ty);
+
+         if(listeJoueur[indiceJoueur].distance != 0){
+           listeJoueur[indiceJoueur].velociteX = (tx/listeJoueur[indiceJoueur].distance)*CONFIGURATION.JOUEUR_POUSSEE;
+           listeJoueur[indiceJoueur].velociteY = (ty/listeJoueur[indiceJoueur].distance)*CONFIGURATION.JOUEUR_POUSSEE;
+         }
+         else {
+           listeJoueur[indiceJoueur].velociteX = listeJoueur[indiceJoueur].velociteY = 0;
+         }
+         if(listeJoueur[indiceJoueur].distance > 1 &&
+           listeJoueur[indiceJoueur].distance > CONFIGURATION.JOUEUR_POUSSEE*deltaValeurTemporelleMilliseconde){
+            vuePartie.deplacerJoueurBoulle(
+              listeJoueur[indiceJoueur].numeroJoueur,
+              listeJoueur[indiceJoueur].velociteX*deltaValeurTemporelleMilliseconde,
+              listeJoueur[indiceJoueur].velociteY*deltaValeurTemporelleMilliseconde);
+          }else if (listeJoueur[indiceJoueur].distance > 1 &&
+            listeJoueur[indiceJoueur].distance < CONFIGURATION.JOUEUR_POUSSEE*deltaValeurTemporelleMilliseconde) {
+            vuePartie.setJoueurBoullePosition(
+              listeJoueur[indiceJoueur].numeroJoueur,
+              listeJoueur[indiceJoueur].destinationX,
+              listeJoueur[indiceJoueur].destinationY);
+          }
+      }
+
+
+
+      //console.log("CONTROLEUR.partie --> agirSurClic : joueurLocal.distance", joueurLocal.distance);
+
+      // console.log("CONTROLEUR.partie --> detecterCollisionBoulle --> groupeBouffeBoulleMange: ",groupeBouffeBoulleMange);
+       /*if (detecterCollisionBoulle())
+       {
+         cacherGroupeBouffeBoulle();
+         grossirJoueurBoulle();
+
+       }*/
 
     }
 
