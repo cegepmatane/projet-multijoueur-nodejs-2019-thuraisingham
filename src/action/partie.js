@@ -254,7 +254,9 @@ CONTROLEUR.partie = (function(){
     {
         genererGroupeBouffeBoulle();
         CONFIGURATION.ECRAN_LARGEUR = (window.innerWidth);
-        CONFIGURATION.ECRAN_HAUTEUR = (window.innerHeight);
+        CONFIGURATION.ECRAN_HAUTEUR = (window.innerHeight) - 55;
+        console.log("ecran hauteur", CONFIGURATION.ECRAN_HAUTEUR);
+        console.log("ecran largeur", CONFIGURATION.ECRAN_LARGEUR);
         vuePartie.afficher(
           CONFIGURATION.ECRAN_LARGEUR,
           CONFIGURATION.ECRAN_HAUTEUR,

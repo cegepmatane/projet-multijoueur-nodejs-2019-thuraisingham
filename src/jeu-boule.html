@@ -4,71 +4,10 @@
       <meta charset="utf-8">
       <title></title>
         <script src="lib/easeljs-0.8.2.min.js"></script>
+        <link rel="stylesheet" href="style/background.css" />
+        <link rel="stylesheet" href="style/titre.css" />
       <style>
-        body
-        {
-          margin:0;
-          overflow: hidden;
-          width: 100vw;
-          height: 100vh;
-        }
-        body {
-        	width: 100wh;
-        	height: 90vh;
-        	color: #fff;
-        	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
-        	background-size: 400% 400%;
-        	-webkit-animation: Gradient 15s ease infinite;
-        	-moz-animation: Gradient 15s ease infinite;
-        	animation: Gradient 15s ease infinite;
-        }
 
-        @-webkit-keyframes Gradient {
-        	0% {
-        		background-position: 0% 50%
-        	}
-        	50% {
-        		background-position: 100% 50%
-        	}
-        	100% {
-        		background-position: 0% 50%
-        	}
-        }
-
-        @-moz-keyframes Gradient {
-        	0% {
-        		background-position: 0% 50%
-        	}
-        	50% {
-        		background-position: 100% 50%
-        	}
-        	100% {
-        		background-position: 0% 50%
-        	}
-        }
-
-        @keyframes Gradient {
-        	0% {
-        		background-position: 0% 50%
-        	}
-        	50% {
-        		background-position: 100% 50%
-        	}
-        	100% {
-        		background-position: 0% 50%
-        	}
-        }
-
-        h1,
-        h6 {
-        	font-family: 'Open Sans';
-        	font-weight: 300;
-        	text-align: center;
-        	position: absolute;
-        	top: 45%;
-        	right: 0;
-        	left: 0;
-        }
       </style>
 
       <script src="lib/svg.min.js"></script>
@@ -80,43 +19,56 @@
       <script src="action/element/ArrierePlan.js"></script>
       <script src="action/element/JoueurBoulle.js"></script>
       <script src="action/element/BouffeBoulle.js"></script>
-    <!--
-      <script src="action/element/PanneauPointage.js"></script>
-      <script src="action/element/Explosion.js"></script>-->
-
       <script src="action/partie.js"></script>
       <script src="action/application.js"></script>
 
     </head>
     <body>
 
-
-
-      <script type="plain/text" id="page-accueil">
-         <div>
-             <h1>Accueil du jeu</h1>
-             <p>
-                 Jeu Bouffe Boulle
+      <script type="plain/text" id="page-accueil" >
+       <p id="accueilJeu">
+                 Accueil du jeu
              </p>
+         <div id="accueil">
+             <h1 id = "titre-acceuil">
+              <em>J</em>
+              <em>E</em>
+              <em>U</em>
+              <em>&nbsp</em>
+              <em>&nbsp</em>
+              <em>B</em>
+              <em class="planet left">O</em>
+              <em>U</em>
+              <em>F</em>
+              <em>F</em>
+              <em>E</em>
+              <em>&nbsp</em>
+              <em>&nbsp</em>
+              <em>B</em>
+              <em class="planet right">O</em>
+              <em>U</em>
+              <em>L</em>
+              <em>L</em>
+              <em>E</em>
+            </h1>
              <form id="formulaire-authentification">
-                <fieldset>
                    <lable>Pseudonyme</lable>
                    <input type="text" id="pseudonyme"/>
                    <input type="submit" value="Authentification" id="bouton-authentification"/>
-               </fieldset>
             </form>
          </div>
-
-
       </script>
+        
 
       <script type="text/plain" id="page-partie">
-          <div id="canevas"></div>
-          <h1>Jeu</h1>
-          //<canvas id="dessin" width="800" height="500"></canvas>
-          <a href="#accueil">Accueil</a>
-          <a href="#fin-partie-gagnee">Fin partie gagnée</a>
-          <a href="#fin-partie-perdue">Fin partie perdue</a>
+            <h2 id="titreJeu">Jeu</h2>
+            <nav>
+                <a href="#accueil">Accueil</a>
+                <a href="#fin-partie-gagnee">Fin partie gagnée</a>
+                <a href="#fin-partie-perdue">Fin partie perdue</a>
+            </nav>
+            <div id="canevas"></div>
+        
       </script>
 
       <script type="plain/text" id="page-fin-partie">
