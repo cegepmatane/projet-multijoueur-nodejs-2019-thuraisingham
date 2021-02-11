@@ -6,6 +6,8 @@
         <script src="lib/easeljs-0.8.2.min.js"></script>
         <link rel="stylesheet" href="style/background.css" />
         <link rel="stylesheet" href="style/page-accueil.css" />
+		<link rel="stylesheet" href="style/page-partie.css" />
+		<link rel="stylesheet" href="style/page-fin-partie.css" />
       <style>
 
       </style>
@@ -26,35 +28,37 @@
     <body>
 
       <script type="plain/text" id="page-accueil" >
-       <p id="accueilJeu">
-                  Bienvenue au jeu
-             </p>
-         <div id="accueil">
-             <h1 id = "titre-acceuil">
-              <em>B</em>
-              <em class="planet left">O</em>
-              <em>U</em>
-              <em>F</em>
-              <em>F</em>
-              <em>E</em>
-              <em>&nbsp</em>
-              <em>&nbsp</em>
-              <em>B</em>
-              <em class="planet right">O</em>
-              <em>U</em>
-              <em>L</em>
-              <em>L</em>
-              <em>E</em>
-            </h1>
-             <form id="formulaire-authentification">
-                   <lable>Pseudonyme</lable>
-                   <input type="text" id="pseudonyme"/>
-                   <input type="submit" value="Authentification" id="bouton-authentification"/>
-            </form>
-         </div>
+		<p id="accueilJeu">
+			BIENVENUE AU JEU
+		</p>
+		 <div id="accueil">
+			 <h1 id = "titre-acceuil">
+			  <em>B</em>
+			  <em class="planet left">O</em>
+			  <em>U</em>
+			  <em>F</em>
+			  <em>F</em>
+			  <em>E</em>
+			  <em>&nbsp</em>
+			  <em>&nbsp</em>
+			  <em>B</em>
+			  <em class="planet right">O</em>
+			  <em>U</em>
+			  <em>L</em>
+			  <em>L</em>
+			  <em>E</em>
+			</h1>
+			 <form id="formulaire-authentification">
+				   <div class="aide-surgissante" id="aide-pseudonyme"></div>
+            <label id="etiquette-pseudonyme" for="pseudonyme" title="Veuillez entrer votre nom ou un surnom pour pouvoir vous identifier dans le jeu. Bon jeu a vous !!">Pseudonyme</label>
+            <input type="text" id="pseudonyme" name="pseudonyme">
+				  
+				   <input type="submit" value="Authentification" id="bouton-authentification"/>
+				   
+			</form>
+		 </div>
       </script>
         
-
       <script type="text/plain" id="page-partie">
             <h2 id="titreJeu">Jeu</h2>
             <nav>
