@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   
+  
 }
 
 #titre-acceuil {
@@ -128,9 +129,13 @@ em.planet.right {
 
 #formulaire-authentification{
 	position: fixed; 
-	top: 70%;
+	top: 0%;
 	left: 38%;
+	margin: 11% 25% 70% 25%;
+	padding : 20px;
 }
+
+
 
 .aide-surgissante
 {
@@ -151,9 +156,51 @@ label
   cursor:pointer;
 }
 
-		
 
 #accueilJeu{
 	background-color: red;
 	padding-bottom: 25px;
 }
+
+#pseudonyme {	
+	 
+		width: 360px;
+		background: #fff;
+		color: #a3a3a3;
+		font: inherit;
+		box-shadow: 0 6px 10px 0 rgba(0, 0, 0 , .1);
+		border: 0;
+		outline: 0;
+		padding: 22px 18px;
+		border-radius:22px;
+}
+
+.bouton-authentification {
+	box-shadow: 9px 5px 10px -2px #8a2a21;
+	background:linear-gradient(to bottom, #c62d1f 5%, #f24437 100%);
+	background-color:#c62d1f;
+	border-radius:18px;
+	border:1px solid #d02718;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:18px;
+	font-weight:bold;
+	padding:14px 28px;
+	margin:center;
+	text-decoration:none;
+	text-shadow:0px 3px 4px #810e05;
+}
+.bouton-authentification:hover {
+	background:linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
+	background-color:#f24437;
+}
+.bouton-authentification:active {
+	position:relative;
+	top:1px;
+}
+
+
+
+
