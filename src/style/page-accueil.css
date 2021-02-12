@@ -24,10 +24,10 @@
   display: block;
   position: absolute;
   z-index: -1;
-  top: -23vmin;
-  left: 13vmin;
-  width: 68vmin;
-  height: 64vmin;
+  top: -29vmin;
+  left: 14vmin;
+  width: 73vmin;
+  height: 68vmin;
   border-radius: 50%;
   border: 1.3vmin solid currentColor;
   box-sizing: border-box;
@@ -65,12 +65,12 @@ em.planet::before {
 
 em.planet.left {
   -webkit-transform-origin: 40vmin 5vmin;
-  transform-origin: 38.5vmin 5vmin;
+  transform-origin: 42vmin 5vmin;
 }
 
 em.planet.right {
   -webkit-transform-origin: -20vmin 5vmin;
-  transform-origin: -30vmin 5vmin;
+  transform-origin: -32vmin 5vmin;
 }
 
 @-webkit-keyframes planet-rotate {
@@ -119,6 +119,9 @@ em.planet.right {
 	color: #fff;
 	margin: auto;
 	text-align: center;
+	background-color: red;
+	padding-top:15px;
+	padding-bottom:20px;
 
 	margin: 0 0;
 
@@ -163,13 +166,6 @@ label
   cursor:pointer;
 }
 
-
-#accueilJeu{
-	background-color: red;
-	padding-top:15px;
-	padding-bottom:20px;
-
-}
 
 #pseudonyme {	
 	 
