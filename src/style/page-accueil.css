@@ -133,9 +133,13 @@ em.planet.right {
 }
 
 #formulaire-authentification{
-align-self: flex-end;
+}
 
-	
+#formulaire{
+	 padding: 100px;
+	 align-items:center;
+	 margin: auto;
+	 width: 50%;
 }
 
 
