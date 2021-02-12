@@ -4,17 +4,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  
+
+	flex-direction: column;  
+
 }
 
 #titre-acceuil {
-  margin: 0;
+  
   height: 12vmin;
   width: 120vmin;
   display: flex;
   justify-content: center;
   position: relative;
+  
 }
 
 #titre-acceuil::before {
@@ -22,10 +24,10 @@
   display: block;
   position: absolute;
   z-index: -1;
-  top: -26vmin;
-  left: 29vmin;
-  width: 62vmin;
-  height: 62vmin;
+  top: -23vmin;
+  left: 13vmin;
+  width: 68vmin;
+  height: 64vmin;
   border-radius: 50%;
   border: 1.3vmin solid currentColor;
   box-sizing: border-box;
@@ -35,6 +37,8 @@ em {
   font-family: "Blippo", fantasy;
   color: currentColor;
   font-size: 15vmin;
+  -webkit-text-stroke: 2px;
+  -webkit-text-stroke-color: red;
   position: relative;
   font-style: normal;
   width: 20vmin;
@@ -61,12 +65,12 @@ em.planet::before {
 
 em.planet.left {
   -webkit-transform-origin: 40vmin 5vmin;
-  transform-origin: 40vmin 5vmin;
+  transform-origin: 38.5vmin 5vmin;
 }
 
 em.planet.right {
   -webkit-transform-origin: -20vmin 5vmin;
-  transform-origin: -20vmin 5vmin;
+  transform-origin: -30vmin 5vmin;
 }
 
 @-webkit-keyframes planet-rotate {
@@ -110,14 +114,15 @@ em.planet.right {
 
 #accueilJeu
 {
-	 font-size: 75pt;
-  font-family: "Blippo", fantasy;
-  color: #fff;
-  text-align: center;
-	
+	font-size: 75pt;
+	font-family: "Blippo", fantasy;
+	color: #fff;
+	margin: auto;
+	text-align: center;
+
 	margin: 0 0;
 
-  text-shadow: 0px -6px 0 #212121, 0px -6px 0 #212121, 0px 6px 0 #212121,
+	text-shadow: 0px -6px 0 #212121, 0px -6px 0 #212121, 0px 6px 0 #212121,
     0px 6px 0 #212121, -6px 0px 0 #212121, 6px 0px 0 #212121, -6px 0px 0 #212121,
     6px 0px 0 #212121, -6px -6px 0 #212121, 6px -6px 0 #212121,
     -6px 6px 0 #212121, 6px 6px 0 #212121, -6px 18px 0 #212121,
@@ -128,11 +133,9 @@ em.planet.right {
 }
 
 #formulaire-authentification{
-	position: fixed; 
-	top: 0%;
-	left: 38%;
-	margin: 11% 25% 70% 25%;
-	padding : 20px;
+align-self: flex-end;
+
+	
 }
 
 
@@ -159,7 +162,9 @@ label
 
 #accueilJeu{
 	background-color: red;
-	padding-bottom: 25px;
+	padding-top:15px;
+	padding-bottom:20px;
+
 }
 
 #pseudonyme {	
@@ -188,7 +193,7 @@ label
 	font-size:18px;
 	font-weight:bold;
 	padding:14px 28px;
-	margin:center;
+
 	text-decoration:none;
 	text-shadow:0px 3px 4px #810e05;
 }
